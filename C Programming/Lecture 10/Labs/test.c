@@ -1,8 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include"single_linkedlist.h"
 
-// creating nodes
+void insertAtFirst(int value);
+void insertAtLeast(int value);
+void deleteValue(int value);
+int searchValue(int value);
+int listSize(void);
+void printList(void);
+void updateValue(int old_data, int new_data);
+
 typedef struct Node
 {
     int data;
@@ -10,39 +16,73 @@ typedef struct Node
 
 }Node;
 
-// static is here to protect the head pointer from being used in another file.c
 static Node* head = NULL;
 static Node* current = NULL;
 static Node* deletedNode = NULL;
 char flag = 0;
 char update = 0;
 
+void main() {
+    short int num, find, delete, counter = 0, old, new;
+    printf("Enter Values to store:\n");
+    scanf(" %d",&num);
+    insertAtFirst(num);
+
+    for (int i = 0; i < 3; i++)
+    {
+        scanf("%d",&num);
+        insertAtLeast(num);
+    }
+    
+    printf("The list is: \n");
+    printList();
+
+    printf("List size is: %d\n",listSize());
+    
+    /*printf("\nEnter the value you want to search: ");
+    scanf(" %d",&find);
+    searchValue(find);
+
+    printf("\nEnter the value you want to delete: ");
+    scanf(" %d",&delete);
+    deleteValue(delete);
+
+    printf("The list is: \n");
+    printList();
+
+    printf("List size is: %d\n",listSize());
+
+    printf("\nEnter the value you want to search: ");
+    scanf(" %d",&find);
+    searchValue(find);*/
+
+    printf("Enter the value you want to update: ");
+    scanf("%d",&old);
+    printf("%d\n",old);
+    printf("Enter the value you want to update: ");
+    scanf("%d",&new);
+    printf("%d\n",new);
+    printf("%d\n",old);
+    //updateValue(old, new);
+
+    printf("\nThe list is: \n");
+    printList();
+
+}
+
+
 void insertAtFirst(int value) {
-    //creating a node
     Node* temp = (Node*)malloc(sizeof(Node));
-
-    // update the data with input parameter
     temp->data = value;
-
-    // points to the next node
     temp->next = head;
-
-    // update head pointer
     head = temp;
 }
 
-// here you have 2 options (1-linked list is empty) (2-linked list have nodes)
+
 void insertAtLeast(int value) {
-    //creating a node
     Node* temp = (Node*)malloc(sizeof(Node));
-
-    // update the data with input parameter
     temp->data = value;
-
-    // points to null
     temp->next = NULL;
-
-    // if list is empty
     if (head == NULL)
     {
         head = temp;
@@ -62,12 +102,9 @@ void insertAtLeast(int value) {
 
 void deleteValue(int value) {
     Node *prev = NULL;
-    // if list is empty
-    if (head == NULL)
-    {
+    if (head == NULL) {
         printf("The list is empty");
-    }
-    // if value is in the first node
+    } 
     else if (head->data == value)
     {
         deletedNode = head;
@@ -75,7 +112,6 @@ void deleteValue(int value) {
         free(deletedNode);
         flag = 1;
     }
-    // if value is not in the first node
     else
     {
         current = head->next;
@@ -96,7 +132,7 @@ void deleteValue(int value) {
             current = current->next;
         }
         
-        if (flag == 0) // indication if the value is not found
+        if (flag == 0)
         {
             printf("The value is not found");
         }
@@ -151,7 +187,6 @@ int searchValue(int value) {
     
     
 }
-
 
 int listSize(void) {
     short int counter = 0;
@@ -225,5 +260,6 @@ void updateValue(int old_data, int new_data) {
     {
         flag = 0;
     }
+    
     
 }
