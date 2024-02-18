@@ -15,6 +15,7 @@ static Node* head = NULL;
 static Node* current = NULL;
 static Node* deletedNode = NULL;
 short char flag = 0;
+short char update = 0;
 
 void insertAtFirst(int value) {
     //creating a node
@@ -57,6 +58,8 @@ void insertAtLeast(int value) {
     }
 
 }
+
+
 void deleteValue(int value) {
     Node *prev = NULL;
     // if list is empty
@@ -107,15 +110,93 @@ void deleteValue(int value) {
     
 
 }
+
+
 int searchValue(int value) {
-
+    current = head;
+    if (head == NULL)
+    {
+        printf("The list is empty");
+    }
+    else if (current->data == value)
+    {
+        printf("Value is found");
+        flag = 1;
+        update = 1;
+    }
+    else
+    {
+        while (current != NULL)
+        {
+            if (current->data == value)
+            {
+                printf("Value is found");
+                flag = 1;
+                update = 1;
+                break;
+            }
+            current = current->next;
+        }
+        
+    }
+    
+    if (flag == 0)
+    {
+        printf("Value is not found");
+    }
+    else
+    {
+        flag = 0;
+    }
+    
+    
 }
+
+
 int listSize(void) {
-
+    short int counter = 0;
+    current = head;
+    if (head == NULL)
+    {
+        printf("The list is empty");
+    }
+    else
+    {
+        while (current != NULL)
+        {
+            ++counter;
+            current = current->next;
+        }
+        printf("List size is %d",counter);
+    }
 }
+
+
 void printList(void) {
-
+    current = head;
+    if (head == NULL)
+    {
+        printf("The list is empty");
+    }
+    else
+    {
+        while (current != NULL)
+        {
+            printf("%d\n",current->data);
+            current = current->next;
+        }
+        
+    }
+    
 }
+
+
 void updateValue(int old_data, int new_data) {
+    searchValue(old_data);
+    if (update == 1)
+    {
+        current->data = new_data;
+        printf("Value updated");
+    }
     
 }
